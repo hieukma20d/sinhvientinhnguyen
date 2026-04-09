@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
-  // 1. COUNTDOWN TIMER LOGIC
+  // 1. COUNTDOWN TIMER LOGIC (19/04/2026)
   // ==========================================
   const targetDate = new Date("2026-04-19T19:00:00+07:00").getTime();
-
   const daysEl = document.getElementById("cd-days");
   const hoursEl = document.getElementById("cd-hours");
   const minutesEl = document.getElementById("cd-minutes");
@@ -36,10 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateCountdown, 1000);
 
   // ==========================================
-  // 2. SCROLL ANIMATION LOGIC
+  // 2. SCROLL ANIMATION LOGIC (Hiện phần MAIN khi cuộn)
   // ==========================================
   const fadeElements = document.querySelectorAll('.fade-in');
-  
   const appearOptions = {
     threshold: 0.15,
     rootMargin: "0px 0px -50px 0px"
@@ -58,43 +56,53 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ==========================================
-  // 3. BACKGROUND MUSIC LOGIC
+  // 3. BACKGROUND MUSIC LOGIC (AUTO-PLAY & LOOP)
   // ==========================================
-  const welcomeBtn = document.getElementById("guest-welcome");
   const bgMusic = document.getElementById("bg-music");
-  let isPlaying = false;
+  const welcomeBtn = document.getElementById("guest-welcome");
 
-  if(welcomeBtn && bgMusic) {
+  if (bgMusic) {
+    bgMusic.loop = true; 
+  }
+
+  function playMusic() {
+    if (bgMusic && bgMusic.paused) {
+      bgMusic.play().then(() => {
+        if (welcomeBtn) welcomeBtn.innerHTML = "✦ Âm nhạc đang phát ✦";
+        removeMusicTriggers();
+      }).catch(err => {
+        // Chờ tương tác tiếp theo nếu trình duyệt chặn
+      });
+    }
+  }
+
+  const triggers = ["click", "scroll", "touchstart", "wheel"];
+  function removeMusicTriggers() {
+    triggers.forEach(evt => document.removeEventListener(evt, playMusic));
+  }
+  triggers.forEach(evt => document.addEventListener(evt, playMusic, { once: true }));
+
+  // Logic nút Welcome cuộn xuống phần chính
+  if (welcomeBtn) {
     welcomeBtn.addEventListener("click", () => {
-      if(!isPlaying) {
-        bgMusic.play().then(() => {
-          isPlaying = true;
-          welcomeBtn.innerHTML = "✦ Âm nhạc đang phát ✦";
-          showToast("🎵 Đã bật nhạc nền sự kiện!");
-          
-          document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
-        }).catch(err => {
-          console.log("Trình duyệt chặn tự động phát nhạc:", err);
-          showToast("Trình duyệt của bạn đang chặn phát nhạc tự động.");
-        });
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        mainContent.scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
 });
 
 // ==========================================
-// 4. CALENDAR & TOAST FUNCTIONS
+// 4. CÁC HÀM TIỆN ÍCH (Global)
 // ==========================================
 function addToCalendar() {
   const title = encodeURIComponent("CCV Birthday Party");
   const details = encodeURIComponent("Birthday invitation for the Vinh University Youth Union Media Team");
   const location = encodeURIComponent("Duy Tan Hotel, Vinh City, Vietnam");
-  
   const startDate = "20260419T120000Z"; 
   const endDate = "20260419T150000Z"; 
-
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-  
   window.open(googleCalendarUrl, '_blank');
 }
 
@@ -103,8 +111,6 @@ function showToast(message) {
   if(toast) {
     toast.innerText = message;
     toast.className = "toast show";
-    setTimeout(function(){ 
-      toast.className = toast.className.replace("show", ""); 
-    }, 3000);
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
   }
 }
