@@ -134,12 +134,13 @@ main {
 }
 
 main::before {
+  display: block; /* Bật lại lớp phủ */
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 255, 255, 0.85); 
+  background: rgba(255, 255, 255, 0.5); /* Phủ màu trắng mờ 50% */
+  backdrop-filter: blur(4px); /* Làm mờ ảnh nền phía sau nét hơn một chút */
   z-index: -1;
-  display: none;
 }
 
 /* ================= UTILITIES & LAYOUT ================= */
@@ -230,7 +231,6 @@ main::before {
 
 /* ================= COUNTDOWN (DẠNG MỘT KHỐI LIỀN MẠCH) ================= */
 #countdown-title{
-  color:#1a1a1a;
   font-family: var(--font-heading);
   font-size: 2rem;
 }
