@@ -75,10 +75,7 @@ a {
 }
 
 .hero-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: -1;
+  display: none
 }
 
 .hero-content {
@@ -142,6 +139,7 @@ main::before {
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(255, 255, 255, 0.85); 
   z-index: -1;
+  display: none;
 }
 
 /* ================= UTILITIES & LAYOUT ================= */
@@ -230,22 +228,35 @@ main::before {
   }
 }
 
-/* ================= COUNTDOWN ================= */
+/* ================= COUNTDOWN (DẠNG MỘT KHỐI LIỀN MẠCH) ================= */
 .countdown-grid {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Giới hạn độ rộng để khối không bị bè ra quá to trên PC */
+  margin: 0 auto; /* Căn giữa khối */
+  
+  /* Đưa nền trắng, bo góc và bóng đổ ra khung ngoài cùng */
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(124, 92, 191, 0.15);
+  border: 1px solid rgba(124, 92, 191, 0.2);
+  overflow: hidden; /* Đảm bảo các góc bo tròn không bị tràn */
 }
 
+
 .countdown-item {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(124, 92, 191, 0.1);
-  min-width: 100px;
+  flex: 1; /* Chia đều không gian cho cả 4 ô */
+  padding: 1.5rem 0.5rem;
   text-align: center;
-  border: 1px solid rgba(124, 92, 191, 0.2);
+  /* Đã xóa dòng border-right ở đây để làm mất viền dọc */
+}
+
+
+/* Ẩn vách ngăn dọc ở ô cuối cùng (Giây) để không bị viền thừa */
+.countdown-item:last-child {
+  border-right: none;
 }
 
 .countdown-number {
@@ -263,6 +274,25 @@ main::before {
   color: #777;
 }
 
+/* ================= Tinh chỉnh cho Điện thoại ================= */
+@media (max-width: 480px) {
+  .countdown-grid {
+    border-radius: 12px;
+  }
+  
+  .countdown-item {
+    padding: 1rem 0.2rem;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem; /* Thu nhỏ chữ số để vừa màn hình */
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+    letter-spacing: 0px;
+  }
+}
 /* ================= DRESS CODE ================= */
 .dress-code-wrap {
   display: flex;
