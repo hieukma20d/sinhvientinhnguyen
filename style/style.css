@@ -39,6 +39,7 @@ a {
 }
 
 .section-title {
+  color: #7c5cdf;
   font-family: var(--font-heading);
   font-size: 2.5rem;
   text-align: center;
@@ -85,10 +86,15 @@ a {
 
 .hero-title {
   font-family: var(--font-script);
-  font-size: 4rem;
+  font-size: 8rem; /* Tăng kích thước một chút cho hoành tráng */
   margin-bottom: 1rem;
-  color: var(--accent-color);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  
+  /* Đổi sang màu vàng kim rực rỡ */
+  color: #F28C28; 
+  
+  /* Đổ bóng đậm và dày để chữ nổi hẳn lên trên nền xanh */
+  /* text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 
+               0 0 20px rgba(255, 215, 0, 0.4);  */
 }
 
 .hero-logo-wrap {
@@ -106,22 +112,35 @@ a {
   margin-bottom: 0.5rem;
 }
 
+
+
 .btn-save-date {
   display: inline-block;
   margin-top: 2rem;
-  padding: 10px 30px;
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
-  font-weight: 600;
+  padding: 12px 35px;
+  
+  /* Đổi nền thành màu trắng đục nhẹ để nổi bật trên nền xanh */
+  background: rgba(255, 255, 255, 0.9); 
+  
+  /* Chữ màu tím đậm hoặc xanh đậm để dễ đọc */
+  color: #1a1a1a; 
+  
+  border: 2px solid #FFD700; /* Viền màu vàng kim */
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-save-date:hover {
-  background: var(--accent-color);
-  color: var(--text-dark);
+  /* Hiệu ứng khi di chuột vào: Nổi bật hơn nữa */
+  background: #FFD700;
+  color: #000;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
 }
 
 /* ================= MAIN BACKGROUND ================= */
