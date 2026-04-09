@@ -229,6 +229,11 @@ main::before {
 }
 
 /* ================= COUNTDOWN (DẠNG MỘT KHỐI LIỀN MẠCH) ================= */
+#countdown-title{
+  color:#1a1a1a;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+}
 .countdown-grid {
   display: flex;
   justify-content: center;
