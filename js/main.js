@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // ==========================================
   // 1. COUNTDOWN TIMER (19/04/2026)
   // ==========================================
-  const targetDate = new Date("2026-04-19T19:00:00+07:00").getTime();
+  const targetDate = new Date("2026-04-19T19:00:00+10:00").getTime();
   
   function updateCountdown() {
     const now = new Date().getTime();
